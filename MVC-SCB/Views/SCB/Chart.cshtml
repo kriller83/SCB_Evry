@@ -1,0 +1,53 @@
+﻿@model string
+@{
+    ViewBag.Title = "Chart";
+    var dataRows = ViewBag.ChartRows;
+    var chartHeight = dataRows*450; //517;
+}
+
+<h2>Population Chart</h2>
+<h4>@dataRows Multiplicities</h4>
+
+@using (Html.BeginForm())
+{
+@Html.TextBox("txtSearch")
+    <input type="submit" value="Search" class="btn btn-default"/>
+}
+
+<div id="barchart_material" style="width: 1000px; height: @(chartHeight)px;"></div>
+
+@section head{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+}
+
+<script type="text/javascript">
+    //var data = ;
+
+    google.charts.load('current', { 'packages': ['bar'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(@Html.Raw(ViewBag.ChartData.ToString()));
+        // [
+        //  ['Kommun', '2010 - Male', '2010 - Female', '2011 - Male', '2011 - Female'],
+        //  ['Kommun', 1000, 400, 200, 123],
+        //  ['Kommun', 1170, 460, 250, 654],
+        //  ['Kommun', 660, 1120, 300, 234],
+        //  ['Kommun', 1030, 540, 350, 234]
+        //]);
+
+        var options = {
+            chart: {
+                title: 'Newly born per Multiplicity and year',
+                subtitle: '2010 to 2015',
+            },
+            bars: 'horizontal', // Required for Material Bar Charts.
+            hAxis: { format: 'decimal' }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+        //chart.draw(data, options);
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+</script>

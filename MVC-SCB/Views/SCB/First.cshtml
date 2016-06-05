@@ -1,0 +1,42 @@
+﻿@model System.Collections.Generic.IEnumerable<MVC_SCB.Models.Multiplicity>
+
+@{
+    ViewBag.Title = "First";
+}
+
+<h2>Lots of data</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MultiplicityName.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthRate.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthRate.Gender.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthRate.Born)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MultiplicityName.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthRate.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthRate.Gender.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthRate.Born)
+        </td>
+    </tr>
+}
+
+</table>
