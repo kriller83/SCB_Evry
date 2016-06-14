@@ -13,7 +13,7 @@ namespace MVC_SCB.Models
         public DbSet<Gender> Genders { get; set; }
         public DbSet<BirthRate> Rates { get; set; }
 
-        public PopulationContext() : base("SCBdatabase")
+        public PopulationContext() : base("SCBdatabasen")
         {
             Database.SetInitializer<PopulationContext>(new PopulationContextInitializer());
         }
